@@ -1,0 +1,99 @@
+<h1 id="git-mrt-map">Git-Mrt-Map</h1>
+
+<p>Git for MRT map</p>
+
+<ul>
+<li><ol><li> <br>
+In the beginning, I let  to go to the transit point first by “commit”</li></ol>
+
+<p>Then, use the  to merge it as following:</p></li>
+</ul>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs ">   (Tamsui) touch Zhongshan
+            git add Zhongshan
+            git commit -am <span class="hljs-string">"Zhongshan"</span>
+            git checkout master
+   <span class="hljs-comment"># master branch stays at Beimen --&gt; Songshan</span>
+   (master) git merge Zhongshan --no-ff</code></pre>
+
+<p>However, this approach will create two <strong>Songshan</strong> nodes, <br>
+   One is from Tamsui branch, and the other one is from  <br>
+   the merge of master and Tamsui branches</p>
+
+<p>OR</p>
+
+<p>We do not need to move  branch to the transit station.</p>
+
+<p>What we have to do is to merge directly with <strong>–no-ff</strong></p>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs ">
+   <span class="hljs-comment"># Tamsui stays at Taipei Main Station --&gt; Tamsui</span>
+   (Tamsui) git log     <span class="hljs-comment"># checkout your current station</span>
+            git checkout master
+
+   <span class="hljs-comment"># master stays at Beimen --&gt; Songshan</span>
+   <span class="hljs-comment"># I want to use &lt;master&gt; branch to merge(fast forward) to other branch</span>
+   (master) git merge Tamsui --no-ff
+            <span class="hljs-comment"># Add "Zhongshan" to the merge comment</span>
+   <span class="hljs-comment"># Then, you will see one Zhongshan node only!!!</span></code></pre>
+
+<p>PS. You can use either master branch or Tamsui branch to merge for the transit station</p>
+
+<p>This way you will leave the  branch points to its previous node but <br>
+    branch moves forward to the new merge point (Zhongshan: Tamsui and master)</p>
+
+<p>So, you can create a new branch from that merge point to continue the task</p>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs ">   (master) git branch branchname &lt;sha1-of-commit&gt;</code></pre>
+
+<ul>
+<li><p>2.</p>
+
+<p>2a. If you want to move backward</p></li>
+</ul>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs ">
+       (master) git reset --hard &lt;commit hex value&gt;
+
+       Note: &lt;commit hex value&gt;: you can know this value from git log</code></pre>
+
+<p>2b. Git rename branch</p>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs ">       $ git branch -m &lt;oldname&gt; &lt;newname&gt;
+
+       If you want to rename the current branch, you can simply <span class="hljs-keyword">do</span>:
+       $ git branch -m &lt;newname&gt;</code></pre>
+
+<p>2c. Push all branches and tags</p>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs ">      $ git push --all origin</code></pre>
+
+<p>2d. If your local repository is older than remote, please do take this very carefully <br>
+       to force the remote push with <strong>-f</strong> option</p>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs ">      $ git push <span class="hljs-operator">-f</span> origin master
+    OR
+      push multiple branches
+      $ git push --all <span class="hljs-operator">-f</span> origin</code></pre>
+
+<ul>
+<li><p>3.</p>
+
+<p>It takes some time to finish it.</p>
+
+<p>However, you can write a script to type the command for you</p></li>
+</ul>
