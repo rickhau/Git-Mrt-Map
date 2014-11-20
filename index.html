@@ -2,11 +2,14 @@
 
 <p>Git for MRT map</p>
 
-<ul>
-<li><ol><li> <br>
-In the beginning, I let  to go to the transit point first by “commit”</li></ol>
+<p>1) Deal with Merge points(Transit Station)</p>
 
-<p>Then, use the  to merge it as following:</p></li>
+<ul>
+<li><p>Create two nodes for transit station:</p>
+
+<p>Move <code>&lt;other branch&gt;</code> to go to the transit point first by “commit”</p>
+
+<p>Then, checkout to the <code>&lt;main branch&gt;</code> to merge it as following:</p></li>
 </ul>
 
 
@@ -18,15 +21,29 @@ In the beginning, I let  to go to the transit point first by “commit”</li></
    <span class="hljs-comment"># master branch stays at Beimen --&gt; Songshan</span>
    (master) git merge Zhongshan --no-ff</code></pre>
 
-<p>However, this approach will create two <strong>Songshan</strong> nodes, <br>
-   One is from Tamsui branch, and the other one is from  <br>
-   the merge of master and Tamsui branches</p>
+<p>However, this approach will create two <strong>Songshan</strong> nodes,</p>
+
+<p>One is from Tamsui branch, and the other one is from</p>
+
+<p>the merge of master and Tamsui branches which stays at master branch</p>
+
+<p>Figure:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs brainfuck">   <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span>&lt;<span class="hljs-comment">Tamsui</span>&gt;<span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">Zongshan</span>
+                             <span class="hljs-comment">\</span>
+   <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span>&lt;<span class="hljs-comment">master</span>&gt;<span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">Zongshan</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span>&gt;                      </code></pre>
 
 <p>OR</p>
 
-<p>We do not need to move  branch to the transit station.</p>
+<ul>
+<li><p>Stop your <code>&lt;other branch&gt;</code> to the merge point and create a new one from master</p>
 
-<p>What we have to do is to merge directly with <strong>–no-ff</strong></p>
+<p>We do not need to move <code>&lt;Tamsui&gt;</code> branch to the transit station.</p>
+
+<p>What we have to do is to merge directly with <code>--no-ff</code></p></li>
+</ul>
 
 
 
@@ -41,47 +58,65 @@ In the beginning, I let  to go to the transit point first by “commit”</li></
             <span class="hljs-comment"># Add "Zhongshan" to the merge comment</span>
    <span class="hljs-comment"># Then, you will see one Zhongshan node only!!!</span></code></pre>
 
-<p>PS. You can use either master branch or Tamsui branch to merge for the transit station</p>
-
-<p>This way you will leave the  branch points to its previous node but <br>
-    branch moves forward to the new merge point (Zhongshan: Tamsui and master)</p>
-
-<p>So, you can create a new branch from that merge point to continue the task</p>
+<p>Figure:                                               </p>
 
 
 
-<pre class="prettyprint"><code class="language-bash hljs ">   (master) git branch branchname &lt;sha1-of-commit&gt;</code></pre>
+<pre class="prettyprint"><code class=" hljs brainfuck">                    <span class="hljs-comment">(master)$</span> <span class="hljs-comment">git</span> <span class="hljs-comment">checkout</span> <span class="hljs-literal">-</span><span class="hljs-comment">b</span> <span class="hljs-comment">NewTamsui</span>
+                                    <span class="hljs-comment">(Create</span> <span class="hljs-comment">new</span> <span class="hljs-comment">branch)</span>     
+ <span class="hljs-literal">-</span><span class="hljs-literal">-</span>&lt;<span class="hljs-comment">Tamsui</span>&gt;<span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">TPE</span> <span class="hljs-comment">Station</span><span class="hljs-literal">-</span>     <span class="hljs-literal">-</span><span class="hljs-literal">-</span>&lt;<span class="hljs-comment">New</span> <span class="hljs-comment">Tamsui</span> <span class="hljs-comment">branch</span>&gt;<span class="hljs-literal">-</span><span class="hljs-literal">-</span>&gt;
+                          <span class="hljs-comment">\</span>   <span class="hljs-comment">/</span>
+ <span class="hljs-literal">-</span><span class="hljs-literal">-</span>&lt;<span class="hljs-comment">master</span>&gt;<span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">BeiMen</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">Zongshan</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span>&gt; <span class="hljs-comment">master</span></code></pre>
 
-<ul>
-<li><p>2.</p>
+<p>PS. You can use either master or Tamsui branch to merge for the transit station</p>
 
-<p>2a. If you want to move backward</p></li>
-</ul>
+<p>This way you will leave the <code>&lt;Tamsui&gt;</code> branch points to its previous node(TPE Main Station). </p>
+
+<p>But  <code>&lt;master&gt;</code> branch moves forward to the new merge point (Zhongshan: Tamsui and master)</p>
+
+<p>So, you have to create a new branch from that merge point to continue the task</p>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs ">   (master) git checkout -b NewTamsui
+
+   <span class="hljs-keyword">if</span> master HEAD has moved to new commit, you can use `git log` to query
+   the SHA1 commit of Zongshan, <span class="hljs-keyword">then</span> use the following command 
+   to create the new branch from there.
+
+   (master) git branch branchname &lt;sha1-of-commit&gt;
+
+   Ex:
+   (master) git branch NewTamsui <span class="hljs-number">8608</span>c5c   </code></pre>
+
+<p>2) Git commands Review</p>
+
+<p>a. If you want to move backward</p>
 
 
 
 <pre class="prettyprint"><code class="language-bash hljs ">
-       (master) git reset --hard &lt;commit hex value&gt;
+      (master) git reset --hard &lt;commit hex value&gt;
 
        Note: &lt;commit hex value&gt;: you can know this value from git log</code></pre>
 
-<p>2b. Git rename branch</p>
+<p>b. Git rename branch</p>
 
 
 
-<pre class="prettyprint"><code class="language-bash hljs ">       $ git branch -m &lt;oldname&gt; &lt;newname&gt;
+<pre class="prettyprint"><code class="language-bash hljs ">      $ git branch -m &lt;oldname&gt; &lt;newname&gt;
 
-       If you want to rename the current branch, you can simply <span class="hljs-keyword">do</span>:
-       $ git branch -m &lt;newname&gt;</code></pre>
+      If you want to rename the current branch, you can simply <span class="hljs-keyword">do</span>:
+      $ git branch -m &lt;newname&gt;</code></pre>
 
-<p>2c. Push all branches and tags</p>
+<p>c. Push all branches and tags</p>
 
 
 
 <pre class="prettyprint"><code class="language-bash hljs ">      $ git push --all origin</code></pre>
 
-<p>2d. If your local repository is older than remote, please do take this very carefully <br>
-       to force the remote push with <strong>-f</strong> option</p>
+<p>d. If your local repository is older than remote, please do take this very carefully <br>
+      to force the remote push with <strong>-f</strong> option</p>
 
 
 
@@ -91,9 +126,12 @@ In the beginning, I let  to go to the transit point first by “commit”</li></
       $ git push --all <span class="hljs-operator">-f</span> origin</code></pre>
 
 <ul>
-<li><p>3.</p>
+<li><p>Screenshot of GitX</p>
 
-<p>It takes some time to finish it.</p>
+<p><img src="/gitx.png" alt="Gitx picture" title=""></p></li>
+<li><p>It takes some time to finish it but this is a good topic to practice <code>Git</code> commands!!</p>
 
 <p>However, you can write a script to type the command for you</p></li>
+<li><p>I do not use the consistent method to deal with merge points(transit stations) <br>
+Meaning, the git map is mixed with two ways.</p></li>
 </ul>
