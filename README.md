@@ -3,9 +3,11 @@ Git-Mrt-Map
 
 Git for MRT map
 
-1) Deal with Merge points(Transit Station)
+**This is mainly to help me practice Git stuff.**
 
-- Create two nodes for transit station:
+1) Deal with Merge points(Transit Station) -- Recommend b) approach
+
+a. Create two nodes for transit station:
 
   Move `<other branch>` to go to the transit point first by "commit"
 
@@ -26,16 +28,17 @@ Git for MRT map
 
    the merge of master and Tamsui branches which stays at master branch
 
-Figure:
+Figure: This one looks odd
    
 ```
-   -----<Tamsui>--------Zongshan
+   -----<Tamsui>--------Zongshan------------->
                              \
    ---<master>----------------Zongshan--------->                      
 ```
+
 OR
 
-- Stop your `<other branch>` to the merge point and create a new one from master
+b. Stop your `<other branch>` to the merge point and create a new one from master
 
    We do not need to move `<Tamsui>` branch to the transit station.
 
@@ -54,7 +57,7 @@ OR
    # Then, you will see one Zhongshan node only!!!
 ```
 
-Figure:                                               
+Figure: This one makes more sense!                                             
                                                                    
 ```
 					(master)$ git checkout -b NewTamsui
@@ -66,14 +69,18 @@ Figure:
 
    PS. You can use either master or Tamsui branch to merge for the transit station
 
-   This way you will leave the `<Tamsui>` branch points to its previous node(TPE Main Station) but  `<master>` branch moves forward to the new merge point (Zhongshan: Tamsui and master)
+   This way you will leave the `<Tamsui>` branch points to its previous node(TPE Main Station). 
+
+   But  `<master>` branch moves forward to the new merge point (Zhongshan: Tamsui and master)
 
    So, you have to create a new branch from that merge point to continue the task
    
 ```bash
    (master) git checkout -b NewTamsui
 
-if master HEAD has moved to new commit, you can use git log to query the SHA1 commit of Zongshan, then use the following command to create the new branch from there.
+   if master HEAD has moved to new commit, you can use `git log` to query
+   the SHA1 commit of Zongshan, then use the following command 
+   to create the new branch from there.
 
    (master) git branch branchname <sha1-of-commit>
 
@@ -112,16 +119,16 @@ if master HEAD has moved to new commit, you can use git log to query the SHA1 co
       push multiple branches
       $ git push --all -f origin
 ```
-- Screenshot of GitX
+3) Screenshot of GitX
 
   ![Gitx picture](/gitx.png)
      
 
--  It takes some time to finish it but this is a good topic to practice `Git` commands!!
+4) It takes some time to finish it but this is a good topic to practice `Git` commands!!
 
    However, you can write a script to type the command for you
 
--  I do not use the consistent method to deal with merge points(transit stations)
+5) I do not use the consistent method to deal with merge points(transit stations)
    Meaning, the git map is mixed with two ways.
 
 
