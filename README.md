@@ -89,6 +89,7 @@ Figure: This one makes more sense!
 ```
 
    You also can create orphan branch to merge into master branch
+```
 
    (master) $ git checkout --orphan Tamsui
    (Tamsui) $ touch TPEStation
@@ -96,7 +97,7 @@ Figure: This one makes more sense!
    (Tamsui) $ git commit -am "TPE Station"
    (Tamsui) $ git checkout master
    (master) $ git merge Tamsui --no-ff  # merge Tamsui into master
-
+```
 Figure:
 
 ```
