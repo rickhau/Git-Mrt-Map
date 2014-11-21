@@ -88,6 +88,24 @@ Figure: This one makes more sense!
    (master) git branch NewTamsui 8608c5c   
 ```
 
+   You also can create orphan branch to merge into master branch
+
+   (master) $ git checkout --orphan Tamsui
+   (Tamsui) $ touch TPEStation
+   (Tamsui) $ git add .
+   (Tamsui) $ git commit -am "TPE Station"
+   (Tamsui) $ git checkout master
+   (master) $ git merge Tamsui --no-ff  # merge Tamsui into master
+
+Figure:
+
+```
+-----<Tamsui>----TPE Station--
+                               \
+----<master>-----BeiMen--------Zongshan------->master
+
+```
+
 2) Git commands Review
 
    a. If you want to move backward
